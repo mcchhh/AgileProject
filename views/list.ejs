@@ -1,0 +1,50 @@
+<!-- Other HTML code -->
+<!doctype html>
+<html>
+    <head>
+        <title>Carpark webpage</title>
+    </head>
+    <body>
+        <h1>This is the real time of carpark lots in Singapore!</h1>
+        <h3>You can see the list of available carpark lots in Singapore and you 
+            are able to find a parking lot easily with just a click!
+        </h3>
+
+        <!-- <h1>Carpark List</h1> -->
+            <ul>
+            <% carparkInfo.forEach(function(carpark) { %>
+                <li>
+                <strong>Carpark Number:</strong> <%= carpark.carpark_number %><br>
+                <strong>Total Lots:</strong> <%= carpark.total_lots %><br>
+                <strong>Lots Available:</strong> <%= carpark.lots_available %><br>
+                <strong>Update Datetime:</strong> <%= carpark.update_datetime %><br>
+                </li>
+            <% }); %>
+            </ul>
+
+        <table>
+            <thead>
+              <tr>
+                <th>Carpark Number</th>
+                <th>Total Lots</th>
+                <th>Lot Type</th>
+                <th>Lots Available</th>
+                <th>Update Date Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < carparkData.length; i++) { %>
+              <tr>
+                <td><%= carparkData[i].carpark_number %></td>
+                <td><%= carparkData[i].total_lots %></td>
+                <td><%= carparkData[i].lot_type %></td>
+                <td><%= carparkData[i].lots_available %></td>
+                <td><%= carparkData[i].update_datetime %></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+
+
+    </body>
+</html>
