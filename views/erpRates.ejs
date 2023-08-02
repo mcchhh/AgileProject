@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <title>Carpark Rates</title>
+  <!-- Below is the style of the ERP RATES Webpage-->
+  <!-- <style>
+    table {
+      border-collapse: collapse;
+      width: 1000px;
+      float: none;
+      margin: 0 auto;
+    }
+
+    th, td {
+      border: 1px solid black;
+      text-align: center;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #333;
+      color: white;
+    }
+  </style> -->
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="#search">Search</a>
+    <a href="#parking-info">Parking Info</a>
+    <a href="#shopping-malls">Shopping Malls</a>
+    <a href="#reservation">Reservation</a>
+    <a href="#sign-in">Sign In</a>
+  </div>
+
+  <h1>ERP Rates</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>VehicleType</th>
+        <th>DayType</th>
+        <th>StartTime</th>
+        <th>EndTime</th>
+        <th>ZoneID</th>
+        <th>ChargeAmount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (const rate of erpRates) { %>
+        <tr>
+          <td><%= rate.VehicleType %></td>
+          <td><%= rate.DayType %></td>
+          <td><%= rate.StartTime %></td>
+          <td><%= rate.EndTime %></td>
+          <td><%= rate.ZoneID %></td>
+          <td><%= Number(rate.ChargeAmount) %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,26 +1,50 @@
+const axios = require('axios');
+
+// const express = require('express');
+const API_URL = 'http://datamall2.mytransport.sg/ltaodataservice/ERPRates';
+const API_KEY = 'pLVbWkqRRpKBmEwLHF//6w==';
+const headers = {
+    AccountKey: API_KEY,
+    accept: 'application/json'
+  };
+  
 
 module.exports = function (app) {
-    app.get("/", function (req, res) {
-        res.render("index.html")
+
+    // app.get("/", function (req, res) {
+    //     res.render("homepage.ejs");
+    //   });
+
+    // DATA GOV API DOCUMENTATION BELOW - URL 
+    app.get('/', (req, res) => {
+        // Fetch real-time data from the API
+        axios
+            .get('https://api.data.gov.sg/v1/transport/carpark-availability')
+            .then(response => {
+                const jsonData = response.data;
+                // Extract the carpark information from the API response
+                const carparkInfo = jsonData.items[0].carpark_data;
+                res.render('home.ejs', { carparkInfo: carparkInfo });
+            })
+            .catch(error => {
+                console.error(error);
+                res.status(500).send('Error fetching data from API');
+            });
     });
-    app.get("/search", function (req, res) {
-        res.render("search.html");
+    
+    
+  // ACTUAL VIEW FOR THE ERP-RATES WEBPAGE  
+    app.get('/erp-rates', (req, res) => {
+        axios
+            .get(API_URL, { headers })
+            .then(response => {
+                const erpRates = response.data.value;
+                res.render('erpRates.ejs', { erpRates: erpRates });
+            })
+            .catch(error => {
+                console.error('Error fetching ERP rates:', error);
+                res.status(500).send('Error fetching ERP rates');
+            });
     });
-    app.get("/about", function (req, res) {
-        res.render("about.html");
-    });
-    app.get("/search-result", function (req, res) {
-        //searching in the database 
-        res.send("This is the keyword you entered: " + req.query.keyword + "<br>" 
-        + "This is the result of the search:");
-    });
-    app.get("/register", function (req,res) {
-        res.render("register.html");
-       });
-    app.post("/registered", function (req,res) {
-        // saving data in database
-        res.send("Hello "+ req.body.first + " "+ req.body.last 
-        +", you are now registered! We will send you an email to your email address: "
-        + req.body.email);
-    });
+
 }
