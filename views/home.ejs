@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpark webpage</title>
+
+    <!-- CSS for the Top Navigation Bar -->
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!--Error Handling Middleware-->
+    <script>
+    app.use((err, req, res, next) => {
+      console.error(err.stack);
+      res.status(500).send('Something went wrong!');
+    });
+    </script>
+
+</head>
+  <body>
+    <div class="topnav">
+      <a class="active" href="#search">Search</a>
+      <a href="#parking-info">Parking Info</a>
+      <a href="#shopping-malls">Shopping Malls</a>
+      <a href="#reservation">Reservation</a>
+      <a href="#sign-in">Sign In</a>
+    </div>
+
+    <h1 class="h1">This is the real-time carpark information in Singapore!</h1>
+    <h3 class="h3">You can see the list of available carpark lots in Singapore and find a parking lot easily with just a click!</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Carpark Number</th>
+          <th>Total Lots</th>
+          <th>Lots Available</th>
+          <!-- <th>Update Datetime</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <% carparkInfo.sort((a, b) => a.carpark_number.localeCompare(b.carpark_number)).forEach(function(carpark) { %>
+        <tr>
+          <td><%= carpark.carpark_number %></td>
+          <td><%= carpark.carpark_info[0].total_lots %></td>
+          <td><%= carpark.carpark_info[0].lots_available %></td>
+          <!-- <td><%= carpark.carpark_info[0].update_datetime %></td> -->
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
