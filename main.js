@@ -9,6 +9,8 @@ const headers = {
   };
   
 
+  
+
 module.exports = function (app) {
 
     // app.get("/", function (req, res) {
@@ -31,6 +33,16 @@ module.exports = function (app) {
                 res.status(500).send('Error fetching data from API');
             });
     });
+
+    db.all(" SELECT * FROM userLogins", function(err,data){
+  
+        if(err){
+          console.error(err);
+          process.exit(1);
+        }else{
+          console.log(data);
+        }
+      })
     
     
   // ACTUAL VIEW FOR THE ERP-RATES WEBPAGE  

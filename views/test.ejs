@@ -1,0 +1,38 @@
+<!-- test.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+</head>
+<body>
+    <h1>ERP Rates Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Vehicle Type</th>
+                <th>Day Type</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Zone ID</th>
+                <th>Charge Amount</th>
+                <th>Effective Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (const erpRate of erpRatesData) { %>
+                <tr>
+                    <td><%= erpRate.id %></td>
+                    <td><%= erpRate.VehicleType %></td>
+                    <td><%= erpRate.DayType %></td>
+                    <td><%= erpRate.StartTime %></td>
+                    <td><%= erpRate.EndTime %></td>
+                    <td><%= erpRate.ZoneID %></td>
+                    <td><%= erpRate.ChargeAmount %></td>
+                    <td><%= erpRate.EffectiveDate %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

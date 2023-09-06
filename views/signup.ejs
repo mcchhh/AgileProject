@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login & Registration Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style">
+    <link rel="stylesheet" href="login">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unicorns.iconscout.com/release/v4.0.0/css/line.css" rel="stylesheet">
+    <style>
+        footer {
+          padding: 20px;
+          margin-top: 150px;
+          background-color: #f8f9fa; /* Optional: Add a light background color to the footer for better readability */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="container-fluid bg-dark text-center py-3">
+        <h1 class="text-white">CarParko</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <div class="container">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="locations">Locations</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="reservations">Reservations</a>s
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="favourites">Favourites</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="form-open" href="signup">Log In</a> <!-- Updated link for the Sign Up page -->
+          </li>
+          <button class="button">Login</button>
+        </ul>
+      </div>
+    </nav>
+    
+    <!-- Log In For --> 
+    <section class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <form class="form-inline">
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="text" class="form-control" placeholder="Enter email">
+              </div>
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="password" class="form-control" placeholder="Enter password">
+              </div>
+              <button type="submit" class="btn btn-primary mb-2">Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </section>
+  
+
+       <!-- Footer -->
+  <footer class="bg-dark text-light pt-3 pb-2">
+    <div class="container text-left text-md-left">
+        <div class="row text-left text-md-left">
+
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-1">
+                <h5 class="text-uppercase mb-4 font-weight-bold text-info">CarParko</h5>
+                <hr class="mb-4">
+                <p>It's a never ending battle of making your journeys smoother and enjoyable
+                </p>
+
+            </div>
+
+            <div class="col-md-2 col col-lg-2 col-xl-2 mx-auto mt-1">
+              <h5 class="text-uppercase mb-4 font-weight-bold text-info">Account</h5>
+              <hr class="mb-4">
+              <p>
+                <a href="#" class="text-light" style="text-decoration: none;">Sign Up</a>
+            </p>
+              <p>
+                  <a href="#" class="text-light" style="text-decoration: none;">Profile</a>
+              </p>
+              <p>
+                  <a href="#" class="text-light" style="text-decoration: none;">Settings</a>
+              </p>
+              <p>
+                  <a href="#" class="text-light" style="text-decoration: none;">Billing</a>
+              </p>
+              <!-- <p>
+                  <a href="#" class="text-light" style="text-decoration: none;">Notifications</a>
+              </p> -->
+
+          </div>
+
+          <div class="col-md-2 col col-lg-2 col-xl-2 mx-auto mt-1">
+              <h5 class="text-uppercase mb-4 font-weight-bold text-info">Company</h5>
+              <hr class="mb-4">
+              <p>
+                  <a href="#" class="text-light" style="text-decoration: none;">Help Center</a>
+              </p>
+              <p>
+                  <a href="#" class="text-light" style="text-decoration: none;">Support</a>
+              </p>
+              <p>
+                  <a href="#" class="text-light" style="text-decoration: none;">Privacy Statement</a>
+              </p>
+              <p>
+                <a href="#" class="text-light" style="text-decoration: none;">Terms of use</a>
+            </p>
+          </div>
+
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1">
+              <h5 class="text-uppercase mb-4 font-weight-bold text-info">Contacts</h5>
+              <hr class="mb-4">
+              <p>
+                  <li class="fas fa-home mr-3">Based in Singapore </li>
+              </p>
+              <p>
+                  <li class="fas fa-envelope mr-3">Email: carparko@gmail.com</li>
+              </p>
+              <p>
+                  <li class="fas fa-phone mr-3">Tel: +65 6389 7837</li>
+              </p>
+              <p>
+                  <li class="fas fa-print mr-3">Fax: +65 8273 8373</li>
+              </p>
+          </div>
+      </div>
+
+            <hr class="mb-4">
+            <div class="row d-flex justify-content-center">
+                <div> 
+                    <p> 
+                        Copyright 2023 All Rights Reserved By:
+                        <a href="#" style="text-decoration: none;">
+                            <strong class="text-info">CarParko</strong>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="text-center">
+                    <ul class="list-unstyled list-inline">
+                      <li class="list-inline-item">
+                        <a href="#" class="text-light"><i class='bx bxl-facebook' ></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-light"><i class='bx bxl-instagram'></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-light"><i class='bx bxl-google' ></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-light"><i class='bx bxl-linkedin' ></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-light"><i class='bx bxl-youtube' ></i></a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  </footer>
+
+</body>
+</html>

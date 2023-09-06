@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" >
+    <style>
+
+        .form-box {
+        background-color: lightcyan;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        align-items: center;
+        width: 70%; /* Set a desired width */
+        margin: auto; /* Center horizontally */
+        }
+        footer {
+          padding: 20px;
+          margin-top: 150px;
+          background-color: #f8f9fa; /* Optional: Add a light background color to the footer for better readability */
+        }
+        .button {
+          padding: 6px 24px; 
+          border: 2px solid #fff;
+          background: transparent;
+          border-radius: 6px;
+          color: white;
+        }
+        /* Style for the logout confirmation modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-content {
+    background-color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width:25%;
+    transform: translate(-50%, -50%);
+   
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: #000;
+  }
+
+  /* Style for the confirmLogoutBtn within the modal */
+  #confirmLogoutBtn {
+    background: #7d2ae8;
+    margin-top: 10px; /* Adjust the margin to your preference */
+    padding: 10px 20px; /* Adjust the padding to your preference */
+    border-radius: 5px; /* Adjust the border-radius to your preference */
+    color: white;
+    cursor: pointer;
+  }
+        
+    </style>
+</head>
+<body>
+   <!-- Header -->
+   <header class="container-fluid bg-dark text-center py-3">
+    <h1 class="text-white">CarParko</h1>
+</header>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="loggedinhome">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="loggedinlocations">Locations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="reservations">Reservations</a>s
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="favourites">Favourites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="loggedinabout">About</a>
+        </li>
+      </ul>
+      <button class="button" id="form-open">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Add a logout confirmation modal -->
+  <div id="logoutConfirmationModal" class="modal">
+    <div class="modal-content">
+    <span class="close" id="closeLogoutModal">&times;</span>
+    <p>Are you sure you want to log out?</p>
+    <button class="button" id="confirmLogoutBtn" action="/home" method="GET">Confirm Logout</button>
+    </div>
+</div>
+
+    <div class="form-box">
+        <h2 style="text-align: center;">Make your Reservation!</h2>
+        <form onSubmit="handleFormSubmit(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <label for="pin">Security Pin:</label>
+            <input type="pin" id="pin" name="pin" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light pt-3 pb-2">
+        <div class="container text-left text-md-left">
+            <div class="row text-left text-md-left">
+    
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-1">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-info">CarParko</h5>
+                    <hr class="mb-4">
+                    <p>It's a never ending battle of making your journeys smoother and enjoyable
+                    </p>
+    
+                </div>
+    
+                <div class="col-md-2 col col-lg-2 col-xl-2 mx-auto mt-1">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-info">Account</h5>
+                    <hr class="mb-4">
+                    <p>
+                        <a href="#" class="text-light" style="text-decoration: none;">Profile</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-light" style="text-decoration: none;">Settings</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-light" style="text-decoration: none;">Billing</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-light" style="text-decoration: none;">Notifications</a>
+                    </p>
+    
+                </div>
+    
+                <div class="col-md-2 col col-lg-2 col-xl-2 mx-auto mt-1">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-info">Company</h5>
+                    <hr class="mb-4">
+                    <p>
+                        <a href="#" class="text-light" style="text-decoration: none;">Community</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-light" style="text-decoration: none;">Help Center</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-light" style="text-decoration: none;">Support</a>
+                    </p>
+                </div>
+    
+    
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-1">
+                    <h5 class="text-uppercase mb-4 font-weight-bold text-info">Contacts</h5>
+                    <hr class="mb-4">
+                    <p>
+                        <li class="fas fa-home mr-3">Singapore, Singapore </li>
+                    </p>
+                    <p>
+                        <li class="fas fa-envelope mr-3">carparko@gmail.com</li>
+                    </p>
+                    <p>
+                        <li class="fas fa-phone mr-3">+65 6389 7837</li>
+                    </p>
+                    <p>
+                        <li class="fas fa-print mr-3">+65 8273 8373</li>
+                    </p>
+                </div>
+            </div>
+    
+                <hr class="mb-4">
+                <div class="row d-flex justify-content-center">
+                    <div> 
+                        <p> 
+                            Copyright 2023 All Rights Reserved By:
+                            <a href="#" style="text-decoration: none;">
+                                <strong class="text-info">CarParko</strong>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="text-center">
+                        <ul class="list-unstyled list-inline">
+                          <li class="list-inline-item">
+                            <a href="#" class="text-light"><i class='bx bxl-facebook' ></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-light"><i class='bx bxl-instagram'></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-light"><i class='bx bxl-google' ></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-light"><i class='bx bxl-linkedin' ></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-light"><i class='bx bxl-youtube' ></i></a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    
+      </footer>
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Handle form submission logic here
+            // ...
+
+            // Redirect to the reservedLot page
+            window.location.href = '/reservedLot';
+        }
+    </script>
+
+<script>
+    const logoutBtn = document.querySelector("#form-open"); // Change this to your logout button ID or class
+    const logoutConfirmationModal = document.getElementById("logoutConfirmationModal");
+    const closeLogoutModalBtn = document.getElementById("closeLogoutModal");
+    const confirmLogoutBtn = document.getElementById("confirmLogoutBtn");
+
+    // Close the modal if the user clicks outside of it
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+          home.classList.remove("show"); // Hide the form and the modal when clicking 'x' in the modal
+          modal.style.display = "none";
+        }
+      });
+
+      logoutBtn.addEventListener("click", () => {
+  // Display the logout confirmation modal
+  logoutConfirmationModal.style.display = "block";
+});
+closeLogoutModalBtn.addEventListener("click", () => {
+  // Close the logout confirmation modal
+  logoutConfirmationModal.style.display = "none";
+});
+
+confirmLogoutBtn.addEventListener("click", () => {
+  // Redirect to the index page when confirming logout
+  window.location.href = "/home"; // Update the URL to your index page
+});
+
+
+  </script>
+</body>
+</html>
