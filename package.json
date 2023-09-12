@@ -7,7 +7,7 @@
     "build-db": "type db_schema.sql | sqlite3 database.db",
     "clean-db": "del database.db",
     "start": "node index.js",
-    "build": "netlify deploy --prod"
+    "build": "npm run build-db"
   },
   "author": "",
   "license": "ISC",
