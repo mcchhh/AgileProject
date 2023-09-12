@@ -120,13 +120,65 @@ app.get('/test', async (req, res) => {
   }
 });
 
+app.get('/fetch-data', async (req, res) => {
+  try {
+    const response = await axios.get(
+      'http://datamall2.mytransport.sg/ltaodataservice/CarParkAvailabilityv2',
+      {
+        headers: {
+          AccountKey: 'JrUNPOZST02d6av2pOPOMA==',
+        },
+      }
+    );
+
+    const parkingData = response.data.value;
+
+    // Store data in the 'newcarparkinfo' table
+    const insertStmt = db.prepare(`
+      INSERT INTO newcarparkinfo (CarParkID, Area, Development, Location, AvailableLots, LotType, Agency)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `);
+
+    db.serialize(() => {
+      parkingData.forEach((parking) => {
+        const {
+          CarParkID,
+          Area,
+          Development,
+          Location,
+          AvailableLots,
+          LotType,
+          Agency,
+        } = parking;
+        insertStmt.run(
+          CarParkID,
+          Area,
+          Development,
+          Location,
+          AvailableLots,
+          LotType,
+          Agency
+        );
+      });
+    });
+
+    insertStmt.finalize(); // Finalize the prepared statement
+
+    // Send the fetched data as JSON
+    res.json(parkingData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching and storing data.');
+  }
+});
+
 app.get('/', (req,res)=>{
   res.render('index.ejs');
 })
 
-app.get('/signup', (req,res)=>{
-  res.render('signup.ejs');
-})
+// app.get('/signup', (req,res)=>{
+//   res.render('signup.ejs');
+// })
 
 // Define a route to render the loggedin.ejs page
 app.get('/loggedinhome', (req, res) => {
@@ -175,6 +227,7 @@ app.get('/locations', async(req,res)=>{
   }
 });
 
+//Logged in Locations 
 app.get('/loggedinlocations', async(req,res)=>{
   try{
    let carparkInfoData = await new Promise((resolve, reject)=>{
@@ -233,6 +286,14 @@ app.get('/loggedinabout', (req, res) => {
 app.get('/favourites', (req, res) => {
   res.render('favourite.ejs');
 });
+
+//Handle saving favourites (via AJAX or form submission)
+app.post('/save-favourite', (req, res) => {
+  const carparkNumber = req.body.carparkNumber;
+  // Implement the logic to save the favourite, e.e. store it in a database or array 
+
+  res.status(200).send('Favourite saved successfully');
+})
 
 app.get('/get-first-5', async (req, res) => {
   try {

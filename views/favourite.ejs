@@ -7,9 +7,44 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" >
     <style>
+
+    /* Style for the table */
+    /* Style for fixed header row */
+    .table-container thead {
+        position: sticky;
+        top: 0;
+        background-color: #343a40;
+        color: white;
+      }
+      .table-container tr {
+        background-color: #343a40;
+        color: white;
+      }
+      /* Add CSS for the scrollable table container */
+      .table-container {
+        max-height: 450px; /* Set a maximum height for the container */
+        overflow-y: auto; /* Enable vertical scrolling */
+        border: 1px solid #ddd; /* Add a border for visualization */
+        margin: 20px auto; /* Adjust margin as needed */
+        margin-top: 80px;
+        margin-bottom: 80px;
+        width: 85%;
+        /* margin-left: 200px; */
+      }
+  
+      /* Adjust the table style if necessary */
+      .table {
+        width: 100%;
+      }
+
+
+
+
+
+
         footer {
           padding: 20px;
-          margin-top: 150px;
+          margin-top: 100px;
           background-color: #f8f9fa; /* Optional: Add a light background color to the footer for better readability */
         }
         .button {
@@ -83,9 +118,6 @@
               <a class="nav-link" href="loggedinlocations">Locations</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="reservations">Reservations</a>s
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="favourites">Favourites</a>
             </li>
             <li class="nav-item">
@@ -97,13 +129,52 @@
       </nav>
 
       <!-- Add a logout confirmation modal -->
-        <div id="logoutConfirmationModal" class="modal">
-            <div class="modal-content">
-            <span class="close" id="closeLogoutModal">&times;</span>
-            <p>Are you sure you want to log out?</p>
-            <button class="button" id="confirmLogoutBtn" action="/home" method="GET">Confirm Logout</button>
-            </div>
-        </div>
+      <div id="logoutConfirmationModal" class="modal">
+          <div class="modal-content">
+          <span class="close" id="closeLogoutModal">&times;</span>
+          <p>Are you sure you want to log out?</p>
+          <button class="button" id="confirmLogoutBtn" action="/home" method="GET">Confirm Logout</button>
+          </div>
+      </div>
+
+
+
+
+      <!-- Scrollable Table Container -->
+      <div class="table-container">
+        <table class="table">
+          <!-- Table header -->
+          <thead>
+            <tr>
+              <th>Address</th>
+              <th>Total Lots</th>
+              <th>Lots Available</th>
+              <th>Free Parking</th>
+              <th>Night Parking</th>
+              <th>Short Term Parking</th>
+              <th>Car Park Type</th>
+              <th>Parking System</th>
+            </tr>
+          </thead>
+
+          <tbody id="tableBody">
+            <!-- Table rows will be dynamically generated here -->
+              <tr>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
 
       <!-- Footer -->
       <footer class="bg-dark text-light pt-3 pb-2">
@@ -121,9 +192,6 @@
                 <div class="col-md-2 col col-lg-2 col-xl-2 mx-auto mt-1">
                     <h5 class="text-uppercase mb-4 font-weight-bold text-info">Account</h5>
                     <hr class="mb-4">
-                    <p>
-                      <a href="#" class="text-light" style="text-decoration: none;">Sign Up</a>
-                  </p>
                     <p>
                         <a href="#" class="text-light" style="text-decoration: none;">Profile</a>
                     </p>
@@ -213,6 +281,7 @@
     
       </footer>
 
+      <!-- Script for the logout button -->
       <script>
         const logoutBtn = document.querySelector("#form-open"); // Change this to your logout button ID or class
         const logoutConfirmationModal = document.getElementById("logoutConfirmationModal");

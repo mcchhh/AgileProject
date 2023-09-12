@@ -93,7 +93,7 @@
 
         footer {
           padding: 20px;
-          margin-top: 300px;
+          margin-top: 50px;
           background-color: #f8f9fa; /* Optional: Add a light background color to the footer for better readability */
         }
         /* button {
@@ -172,16 +172,11 @@
           <a class="nav-link" href="loggedinlocations">Locations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="reservations">Reservations</a>s
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="favourites">Favourites</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="loggedinabout">About</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="signup">Log In</a> <!-- Updated link for the Sign Up page -->
         
       </ul>
       <button class="button" id="form-open">Logout</button>
@@ -223,7 +218,9 @@
       <!-- Table header -->
       <thead>
         <tr>
-          <th>Carpark Number</th>
+        
+          <!-- <th>Carpark Number</th> -->
+          <th>Save to Favourites</th>
           <th>Address</th>
           <th>Total Lots</th>
           <th>Lots Available</th>
@@ -239,8 +236,11 @@
         <!-- Table rows will be dynamically generated here -->
         <% for (const carpark of carparksData) { %>
           <tr>
-            <td><%= carpark.carparkNumber %></td>
-            <% const matchingCarparkInfo = carparkInfoData.find(info => info.car_park_no === carpark.carparkNumber); %>
+            <td>
+              <button type="button" id="save-favourites">Save</button>
+            </td>
+            <!-- <td><%= carpark.carparkNumber %></td> -->
+            <!-- <% const matchingCarparkInfo = carparkInfoData.find(info => info.car_park_no === carpark.carparkNumber); %> -->
             <!--<% console.log('Matching carparkInfo for', carpark.carparkNumber, ':', matchingCarparkInfo); %>-->
             <td><a href="#map"><%= matchingCarparkInfo ? matchingCarparkInfo.address : 'N/A' %></a></td>
             <td><%= carpark.totalLots %></td>
@@ -260,7 +260,6 @@
       
     </table>
   </div>
-
 
    <!-- Map -->
    <div id="map" style="width: 100%; height: 500px;"></div>
@@ -385,9 +384,6 @@
               <h5 class="text-uppercase mb-4 font-weight-bold text-info">Account</h5>
               <hr class="mb-4">
               <p>
-                <a href="#" class="text-light" style="text-decoration: none;">Sign Up</a>
-            </p>
-              <p>
                   <a href="#" class="text-light" style="text-decoration: none;">Profile</a>
               </p>
               <p>
@@ -396,10 +392,6 @@
               <p>
                   <a href="#" class="text-light" style="text-decoration: none;">Billing</a>
               </p>
-              <!-- <p>
-                  <a href="#" class="text-light" style="text-decoration: none;">Notifications</a>
-              </p> -->
-
           </div>
 
           <div class="col-md-2 col col-lg-2 col-xl-2 mx-auto mt-1">
