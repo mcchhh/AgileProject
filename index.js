@@ -3,7 +3,7 @@
 const axios = require('axios'); // Library required for LTA API documentation 
 const ejs = require('ejs');
 const express = require('express');
-const serverless = require('serverless-http');
+//const serverless = require('serverless-http');
 // const mainRoutes = require('./routes/main');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path'); // Import the 'path' module
@@ -60,24 +60,6 @@ app.use(express.static(__dirname + '/public'));
     
     console.log('Intial data inserted successfully');
 
-
-    //For ERP rates
-    const erpResponse = await axios.get(API_URL_ERP, {
-      headers: {
-        AccountKey: API_KEY,
-        accept: 'application/json'
-      }
-    });
-    const erpData = erpResponse.data;
-
-    for(const erpRate of erpData.value){
-      const { VehicleType, DayType, StartTime, EndTime, ZoneID, ChargeAmount, EffectiveDate } = erpRate;
-
-      await db.run('INSERT INTO erprates (VehicleType, DayType, StartTime, EndTime, ZoneID, ChargeAmount, EffectiveDate) VALUES (?,?,?,?,?,?,?)',
-      [VehicleType,DayType,StartTime,EndTime,ZoneID,ChargeAmount,EffectiveDate]);
-    }
-    console.log('ERP data inserted succesfully');
-    
   }catch(error){
     console.error('Error inserting intial data',error);
   }
@@ -99,24 +81,6 @@ cron.schedule('*/5 * * * *', async()=>{
     console.log('Data updated successfully');
   } catch(error) {
     console.error('Error updating data', error);
-  }
-});
-
-//ErpRates on ejs
-app.get('/test', async (req, res) => {
-  try {
-      db.all('SELECT * FROM erprates', (err, rows) => {
-          if (err) {
-              console.error(err);
-              res.status(500).send('An error occurred.');
-          } else {
-              //res.json(rows);
-              res.render('test',{erpRatesData: rows});
-          }
-      });
-  } catch (error) {
-      console.error(error);
-      res.status(500).send('An error occurred.');
   }
 });
 
@@ -171,6 +135,7 @@ app.get('/fetch-data', async (req, res) => {
     res.status(500).send('Error fetching and storing data.');
   }
 });
+
 
 app.get('/', (req,res)=>{
   res.render('index.ejs');
@@ -250,11 +215,21 @@ app.get('/loggedinlocations', async(req,res)=>{
     });
    });
 
+   let newcarparkinfoData = await new Promise((resolve, reject)=>{
+    db.all('SELECT Area FROM newcarparkinfo', (err, rows)=>{
+      if(err){
+        reject(err);
+      } else{
+        resolve(rows);
+      }
+    });
+   });
+
    // Sort the carparksData array by carparkNumber
    carparksData = carparksData.slice().sort((a, b) => a.carparkNumber.localeCompare(b.carparkNumber));
    
    
-   res.render('loggedinlocations', {carparkInfoData, carparksData});
+   res.render('loggedinlocations', {carparkInfoData, carparksData, newcarparkinfoData});
   //  res.render('map');
   } catch(error){
     console.error('Error fetching data:', error);
@@ -263,13 +238,6 @@ app.get('/loggedinlocations', async(req,res)=>{
 });
    
 
-app.get('/reservations', (req, res) => {
-  res.render('reservations.ejs');
-});
-
-app.get('/reservedLot', (req, res) => {
-  res.render('reservedLot.ejs');
-});
 
 app.get('/home', (req, res) => {
   res.render('index.ejs');
@@ -295,21 +263,6 @@ app.post('/save-favourite', (req, res) => {
   res.status(200).send('Favourite saved successfully');
 })
 
-app.get('/get-first-5', async (req, res) => {
-  try {
-      db.all('SELECT * FROM carparks LIMIT 5', (err, rows) => {
-          if (err) {
-              console.error(err);
-              res.status(500).send('An error occurred.');
-          } else {
-              res.json(rows);
-          }
-      });
-  } catch (error) {
-      console.error(error);
-      res.status(500).send('An error occurred.');
-  }
-});
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
@@ -317,8 +270,8 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 
-app.use('/.netlify/home', router);
-module.exports.handler = serverless(app);
+//app.use('/.netlify/home', router);
+//module.exports.handler = serverless(app);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 

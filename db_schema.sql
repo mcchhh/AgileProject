@@ -31,16 +31,6 @@ CREATE TABLE IF NOT EXISTS carparkinfo(
     car_park_basement INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS erprates(
-    id INTEGER PRIMARY KEY,
-    VehicleType TEXT,
-    DayType TEXT,
-    StartTime TEXT,
-    EndTime TEXT,
-    ZoneID TEXT,
-    ChargeAmount REAL,
-    EffectiveDate TEXT
-);
 
 CREATE TABLE IF NOT EXISTS userCredentials(
     id  INTEGER PRIMARY KEY AUTOINCREMENT, 

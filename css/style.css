@@ -14,6 +14,10 @@ nav {
   margin-bottom: 0;
 }
 
+.navbar-dark{
+  color: rgba(255, 255, 255);
+}
+
 .container {
   flex: 1; /* Ensure the container takes the remaining space between header and footer */
 }

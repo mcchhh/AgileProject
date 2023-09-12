@@ -6,7 +6,17 @@
     <link rel="stylesheet" href="style">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
+
+      /* Add this CSS to your existing <style> section */
+        header h1 {
+            font-family: 'Montserrat', sans-serif; /* Use the custom font you included */
+            /* You can also specify fallback fonts in case the custom font doesn't load */
+            /* font-family: 'Roboto', Arial, sans-serif; */
+            font-size: 70px; /* Change the font size to your desired value */
+        }
         footer {
           padding: 20px;
           background-color: #f8f9fa; /* Optional: Add a light background color to the footer for better readability */
@@ -20,6 +30,24 @@
           background: transparent;
           border-radius: 6px;
           color: white;
+        }
+
+
+        /* Select the .nav-link class and apply the styles */
+        .nav-link {
+          color: white; /* Set the text color to white */
+          font-size: 18px; /* Increase the font size to your desired value */
+          /* You can also add other styles like text-decoration, if needed */
+        }
+
+        /* Optionally, you can style the links on hover and when they are active */
+        .nav-link:hover {
+          text-decoration: underline; /* Add underline on hover */
+        }
+
+        .nav-link.active {
+          /* Add styles for the active link (e.g., when on the current page) */
+          font-weight: bold; /* Make it bold, for example */
         }
 
 /* Style for the logout confirmation modal */
@@ -200,26 +228,31 @@
         <h1 class="text-white">CarParko</h1>
     </header>
 
-    <!-- Navigation Bar -->
+
+
+      <!-- Navigation Bar -->
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <div class="container">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="loggedinhome">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="loggedinlocations">Locations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="favourites">Favourites</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="loggedinabout">About</a>
-            </li>
-          </ul>
-          <button class="button" id="form-open">Logout</button>
-        </div>
-      </nav>
+      <div class="container d-flex justify-content-between align-items-center">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item" style="margin-left:95px">
+            <a class="nav-link" href="loggedinhome">Home</a>
+          </li>
+          <li class="nav-item" style="margin-left:20px">
+            <a class="nav-link" href="loggedinlocations">Locations</a>
+          </li>
+          <li class="nav-item" style="margin-left:20px">
+            <a class="nav-link" href="favourites">Favourites</a>
+          </li>
+          <li class="nav-item" style="margin-left:20px" m>
+            <a class="nav-link" href="loggedinabout">About</a>
+          </li>
+        </ul>
+        <button class="button" id="form-open">Logout</button>
+      </div>
+    </nav>
+
+
+
 
     <!-- Add a logout confirmation modal -->
   <div id="logoutConfirmationModal" class="modal">

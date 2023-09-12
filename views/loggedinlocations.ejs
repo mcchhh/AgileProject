@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 
 
 
@@ -20,6 +22,14 @@
   <script src="map.js"></script>
 
     <style>
+
+      /* Add this CSS to your existing <style> section */
+        header h1 {
+            font-family: 'Montserrat', sans-serif; /* Use the custom font you included */
+            /* You can also specify fallback fonts in case the custom font doesn't load */
+            /* font-family: 'Roboto', Arial, sans-serif; */
+            font-size: 70px; /* Change the font size to your desired value */
+        }
       /* Style for fixed header row */
       .table-container thead {
         position: sticky;
@@ -47,6 +57,24 @@
       .table {
         width: 100%;
       }
+
+
+      /* Select the .nav-link class and apply the styles */
+      .nav-link {
+          color: white; /* Set the text color to white */
+          font-size: 18px; /* Increase the font size to your desired value */
+          /* You can also add other styles like text-decoration, if needed */
+        }
+
+        /* Optionally, you can style the links on hover and when they are active */
+        .nav-link:hover {
+          text-decoration: underline; /* Add underline on hover */
+        }
+
+        .nav-link.active {
+          /* Add styles for the active link (e.g., when on the current page) */
+          font-weight: bold; /* Make it bold, for example */
+        }
   
   
       #filter-input {
@@ -161,27 +189,26 @@
     <h1 class="text-white">CarParko</h1>
   </header>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="container">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="loggedinhome">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="loggedinlocations">Locations</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="favourites">Favourites</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="loggedinabout">About</a>
-        </li>
-        
-      </ul>
-      <button class="button" id="form-open">Logout</button>
-    </div>
-  </nav>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <div class="container d-flex justify-content-between align-items-center">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item" style="margin-left:95px">
+            <a class="nav-link" href="loggedinhome">Home</a>
+          </li>
+          <li class="nav-item" style="margin-left:20px">
+            <a class="nav-link" href="loggedinlocations">Locations</a>
+          </li>
+          <li class="nav-item" style="margin-left:20px">
+            <a class="nav-link" href="favourites">Favourites</a>
+          </li>
+          <li class="nav-item" style="margin-left:20px" m>
+            <a class="nav-link" href="loggedinabout">About</a>
+          </li>
+        </ul>
+        <button class="button" id="form-open">Logout</button>
+      </div>
+    </nav>
 
   <!-- Add a logout confirmation modal -->
   <div id="logoutConfirmationModal" class="modal">
@@ -222,13 +249,14 @@
           <!-- <th>Carpark Number</th> -->
           <th>Save to Favourites</th>
           <th>Address</th>
+          <th>Area</th>
           <th>Total Lots</th>
           <th>Lots Available</th>
           <th>Free Parking</th>
           <th>Night Parking</th>
-          <th>Short Term Parking</th>
+          <!-- <th>Short Term Parking</th>
           <th>Car Park Type</th>
-          <th>Parking System</th>
+          <th>Parking System</th> -->
         </tr>
       </thead>
 
@@ -239,18 +267,23 @@
             <td>
               <button type="button" id="save-favourites">Save</button>
             </td>
+          
             <!-- <td><%= carpark.carparkNumber %></td> -->
-            <!-- <% const matchingCarparkInfo = carparkInfoData.find(info => info.car_park_no === carpark.carparkNumber); %> -->
+            <% const matchingCarparkInfo = carparkInfoData.find(info => info.car_park_no === carpark.carparkNumber); %>
+            <% const matchingCarparkNewInfo = newcarparkinfoData.find(info => info.location === carparkinfo.address); %>
             <!--<% console.log('Matching carparkInfo for', carpark.carparkNumber, ':', matchingCarparkInfo); %>-->
             <td><a href="#map"><%= matchingCarparkInfo ? matchingCarparkInfo.address : 'N/A' %></a></td>
+            <!-- <td><%= newcarparkinfoData.length > 0 ? newcarparkinfoData.Area : 'N/A' %></td> -->
+            <td><%= matchingCarparkInfo ? matchingCarparkInfo.Area : 'N/A' %></td>
+
             <td><%= carpark.totalLots %></td>
             <td><%= carpark.lotsAvailable %></td>
-            <td><%= matchingCarparkInfo ? matchingCarparkInfo.car_park_type : 'N/A' %></td>
+            <!-- <td><%= matchingCarparkInfo ? matchingCarparkInfo.car_park_type : 'N/A' %></td> -->
             <td><%= matchingCarparkInfo ? matchingCarparkInfo.free_parking : 'N/A' %></td>
             <td><%= matchingCarparkInfo ? matchingCarparkInfo.night_parking : 'N/A' %></td>
-            <td><%= matchingCarparkInfo ? matchingCarparkInfo.short_term_parking : 'N/A' %></td>
-            <td><%= matchingCarparkInfo ? matchingCarparkInfo.type_of_parking_system: 'N/A' %></td>
-          </tr>
+            <!-- <td><%= matchingCarparkInfo ? matchingCarparkInfo.short_term_parking : 'N/A' %></td> -->
+            <!-- <td><%= matchingCarparkInfo ? matchingCarparkInfo.type_of_parking_system: 'N/A' %></td>
+          </tr> -->
           
         <% } %>
         <tr>
@@ -261,56 +294,51 @@
     </table>
   </div>
 
+  
    <!-- Map -->
    <div id="map" style="width: 100%; height: 500px;"></div>
    <script>
 
-    var map = L.map('map').setView([1.3521, 103.8198], 13);
+const map = L.map('map').setView([1.3521, 103.8198], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+// Fetch data from the server and add markers to the map
+fetch('/fetch-data')
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data); // Log the response data to the console
+    data.forEach((parking) => {
+      const { Location, Development, AvailableLots } = parking;
+      const [latitude, longitude] = Location.split(' ').map(parseFloat);
 
-    // Create a marker with a custom data attribute containing the coordinates
-    var singaporeMarker = L.marker([1.3521, 103.8198]).addTo(map);
-    singaporeMarker.bindPopup('Singapore');
-    singaporeMarker.on('mouseover', function() {
-        this.openPopup();
-    });
-    singaporeMarker.on('mouseout', function() {
-        this.closePopup();
-    });
-    singaporeMarker.on('click', function() {
-        // Open Google Maps in a new tab with the coordinates
-        var googleMapsUrl = 'https://www.google.com/maps?q=1.3521,103.8198'; // Replace with your coordinates
-        window.open(googleMapsUrl, '_blank');
-    });
+      const popupContent = `
+        <strong>${Development}</strong><br>
+        Available Lots: ${AvailableLots}
+      `;
 
-    var toaPayohMarker = L.marker([1.3362, 103.8426]).addTo(map);
-    toaPayohMarker.bindPopup('Toa Payoh');
-    toaPayohMarker.on('mouseover', function() {
-        this.openPopup();
-    });
-    toaPayohMarker.on('mouseout', function() {
-        this.closePopup();
-    });
-    toaPayohMarker.on('click', function() {
-        var googleMapsUrl = 'https://www.google.com/maps?q=1.3362,103.8426'; // Replace with your coordinates
-        window.open(googleMapsUrl, '_blank');
-    });
+      const marker = L.marker([latitude, longitude])
+        .addTo(map)
+        .bindPopup(`${Development}: Available Lots - ${AvailableLots}`)
+        .openPopup();
 
-    var sinMingMarker = L.marker([1.3633, 103.8342]).addTo(map);
-    sinMingMarker.bindPopup('Sin Ming');
-    sinMingMarker.on('mouseover', function() {
-        this.openPopup();
+      marker.on('click', () => {
+        const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        window.location.href = googleMapsUrl;
+      });
+
+      marker.on('mouseover', () => {
+        marker.bindTooltip(popupContent).openTooltip();
+      });
+
+      marker.on('mouseout', () => {
+        marker.closeTooltip();
+      });
     });
-    sinMingMarker.on('mouseout', function() {
-        this.closePopup();
-    });
-    sinMingMarker.on('click', function() {
-        var googleMapsUrl = 'https://www.google.com/maps?q=1.3633,103.8342'; // Replace with your coordinates
-        window.open(googleMapsUrl, '_blank');
-    });
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
 
   </script>
 

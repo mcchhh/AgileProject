@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="login">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
       body {
           margin: 0;
@@ -25,6 +27,14 @@
           position: relative;
           z-index: 1; /* Ensure the header content appears on top of the background */
         }
+
+        /* Add this CSS to your existing <style> section */
+          header h1 {
+            font-family: 'Montserrat', sans-serif; /* Use the custom font you included */
+            /* You can also specify fallback fonts in case the custom font doesn't load */
+            /* font-family: 'Roboto', Arial, sans-serif; */
+            font-size: 70px; /* Change the font size to your desired value */
+        }
       
         nav {
           background-color: rgba(0, 0, 0, 0.5);
@@ -32,7 +42,7 @@
 
         footer {
           padding: 20px;
-          margin-top: 300px;
+          margin-top: 150px;
           background-color: #f8f9fa; /* Optional: Add a light background color to the footer for better readability */
         }
         /* button {
@@ -44,6 +54,23 @@
           background: transparent;
           border-radius: 6px;
           color: white;
+        }
+
+        /* Select the .nav-link class and apply the styles */
+        .nav-link {
+          color: white; /* Set the text color to white */
+          font-size: 18px; /* Increase the font size to your desired value */
+          /* You can also add other styles like text-decoration, if needed */
+        }
+
+        /* Optionally, you can style the links on hover and when they are active */
+        .nav-link:hover {
+          text-decoration: underline; /* Add underline on hover */
+        }
+
+        .nav-link.active {
+          /* Add styles for the active link (e.g., when on the current page) */
+          font-weight: bold; /* Make it bold, for example */
         }
 
 
@@ -96,6 +123,27 @@
     cursor: pointer;
   }
 
+  
+  /* Style the custom button */
+  .custom-btn {
+    display: inline-block; /* Display the button as an inline element */
+    padding: 10px 30px; /* Adjust padding for width and height */
+    font-size: 20px; /* Change the font size */
+    font-family: 'Montserrat', sans-serif; /* Change the font family */
+    background-color: #007bff; /* Change the background color */
+    color: #fff; /* Change the text color */
+    border: none; /* Remove the border */
+    border-radius: 5px; /* Add rounded corners */
+    text-decoration: none; /* Remove underlines from links */
+    transition: background-color 0.3s ease; /* Add a smooth transition for background color */
+    margin-top: 130px;
+  }
+
+  /* Style the button on hover */
+  .custom-btn:hover {
+    background-color: #0056b3; /* Change the background color on hover */
+  }
+
         
       </style>
 </head>
@@ -106,31 +154,26 @@
       <h1 class="text-white">CarParko</h1>
     </header>
   
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <div class="container">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="loggedinhome">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="loggedinlocations">Locations</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="favourites">Favourites</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="loggedinabout">About</a>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="signup">Log In</a> <!-- Updated link for the Sign Up page -->
-          
-        </ul>
-        <button class="button" id="form-open">Logout</button>
-
-        
-      </div>
-    </nav>
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between align-items-center">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item" style="margin-left:95px">
+              <a class="nav-link" href="loggedinhome">Home</a>
+            </li>
+            <li class="nav-item" style="margin-left:20px">
+              <a class="nav-link" href="loggedinlocations">Locations</a>
+            </li>
+            <li class="nav-item" style="margin-left:20px">
+              <a class="nav-link" href="favourites">Favourites</a>
+            </li>
+            <li class="nav-item" style="margin-left:20px" m>
+              <a class="nav-link" href="loggedinabout">About</a>
+            </li>
+          </ul>
+          <button class="button" id="form-open">Logout</button>
+        </div>
+      </nav>
 
     <!-- Add a logout confirmation modal -->
     <div id="logoutConfirmationModal" class="modal">
@@ -142,12 +185,10 @@
     </div>
   
 
-    <!-- Search Section -->
-    <div class="container d-flex justify-content-center mt-4">
-      <form id="filter-form" class="form-inline" action="/loggedinlocations" method="GET">
-        <!-- <input id="filter-input" type="text" class="form-control mr-2" name="search" placeholder="Search by address"> -->
-        <button type="submit" class="btn btn-primary">Start searching</button>
-      </form>
+     <!-- Search Section -->
+     <div class="container d-flex justify-content-center mt-4">
+      <!-- Use an anchor element to create a link button -->
+      <a href="/loggedinlocations" class="custom-btn">Start Searching Here</a>
     </div>
 
 
